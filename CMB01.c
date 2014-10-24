@@ -1,0 +1,80 @@
+#include<stdio.h>
+int main()
+{
+char n1[6],n2[6];
+int n,i,x[6],y[6],z[6],o;
+scanf("%d",&n);
+for(o=0;o<n;o++)
+{
+scanf("%s",n1);
+scanf("%s",n2);
+int j=0,k=0,l=0,m=0,carry=0;
+for(i=0;i<6&&n1[i]!='\0';i++)
+{
+    l++;
+}
+for(i=0;i<6&&n2[i]!='\0';i++)
+{
+    m++;
+}
+if(l>=m)
+{
+for(i=0;i<l;i++)
+{
+    x[l-i-1]=n1[i]-'0';
+}
+for(i=0;i<m;i++)
+{
+    y[l-i-1]=n2[i]-'0';
+}
+for(i=0;i<l-m;i++)
+{
+    y[i]=0;
+}
+for(i=l-1;i>=0;i--)
+{
+    z[i+1]=x[i]+y[i]+carry;
+    carry=z[i+1]/10;
+    z[i+1]=z[i+1]%10;
+}
+z[0]=carry;
+for(i=0;z[i]==0;i++)
+j++;
+for(i=l;z[i]==0;i--)
+k++;
+for(i=l-k;i>=j;i--)
+printf("%d",z[i]);
+printf("\n");
+}
+if(l<m)
+{
+for(i=0;i<l;i++)
+{
+    x[m-i-1]=n1[i]-'0';
+}
+for(i=0;i<m;i++)
+{
+    y[m-i-1]=n2[i]-'0';
+}
+for(i=0;i<m-l;i++)
+{
+    x[i]=0;
+}
+for(i=m-1;i>=0;i--)
+{
+    z[i+1]=x[i]+y[i]+carry;
+    carry=z[i+1]/10;
+    z[i+1]=z[i+1]%10;
+}
+z[0]=carry;
+for(i=0;z[i]==0;i++)
+j++;
+for(i=m;z[i]==0;i--)
+k++;
+for(i=m-k;i>=j;i--)
+printf("%d",z[i]);
+printf("\n");
+}
+}
+return 0;
+}

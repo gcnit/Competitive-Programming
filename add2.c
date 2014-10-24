@@ -1,0 +1,132 @@
+#include<stdio.h>
+int main()
+{
+char n1[101],n2[101];
+int i,x[101],y[101],l,m,c,carry,carry1,count,z,j,count1,f;
+while(1)
+{
+l=0,m=0,carry=0,count=0,carry1=0,count1=0,f=0;
+scanf("%s",n1);
+scanf("%s",n2);
+for(i=0;i<100&&n1[i]!='\0';i++)
+{
+    l++;
+}
+for(i=0;i<100&&n2[i]!='\0';i++)
+{
+    m++;
+}
+if(l>=m)
+{
+for(i=0;i<l;i++)
+{
+    x[i]=n1[i]-'0';
+}
+for(i=0;i<m;i++)
+{
+    y[i+l-m]=n2[i]-'0';
+}
+for(i=0;i<l-m;i++)
+{
+    y[i]=0;
+}
+
+for(i=0;i<l;)
+    {
+    if(x[i]<y[i])
+    {
+        for(j=0;j<l;j++)
+        c=x[j],x[j]=y[j],y[j]=c,f=1;
+        break;
+    }
+    else if(x[i]==y[i])
+    i++;
+    else if(x[i]>y[i])
+    break;
+    }
+for(i=l-1;i>=0;i--)
+{
+    x[i+1]=x[i]+y[i]+carry;
+    carry=x[i+1]/10;
+    x[i+1]=x[i+1]%10;
+    if(x[i]>=y[i])
+    {
+        y[i+1]=x[i]-y[i]+carry1;
+        carry1=0;
+    }
+    else
+    {
+        y[i+1]=10+x[i]-y[i]+carry1;
+        carry1=-1;
+    }
+}
+x[0]=carry;
+y[0]=carry1;
+for(i=0;x[i]==0;i++)
+count++;
+for(i=0;y[i]==0;i++)
+count1++;
+for(i=count;i<=l;i++)
+printf("%d",x[i]);
+printf("\n");
+if(f==1)
+y[count1]=-y[count1];
+for(i=count1;i<=l;i++)
+printf("%d",y[i]);
+}
+else
+{
+for(i=0;i<l;i++)
+{
+x[i+m-l]=n1[i]-'0';
+}
+for(i=0;i<m;i++)
+{
+    y[i]=n2[i]-'0';
+}
+for(i=0;i<m-l;i++)
+{
+    x[i]=0;
+}
+for(i=0;i<m;)
+    {
+    if(x[i]<y[i])
+    {
+        for(j=0;j<m;j++)
+        c=x[j],x[j]=y[j],y[j]=c,f=1;
+        break;
+    }
+    else if(x[i]==y[i])
+    i++;
+    else if(x[i]>y[i])
+    break;
+    }
+for(i=m-1;i>=0;i--)
+{
+    x[i+1]=x[i]+y[i]+carry;
+    carry=x[i+1]/10;
+    x[i+1]=x[i+1]%10;
+    y[i+1]=x[i]-y[i]+carry1+10;
+    carry1=y[i+1]/10-1;
+ }
+x[0]=carry;
+y[0]=carry1;
+for(i=0;x[i]==0;i++)
+count++;
+for(i=0;y[i]==0;i++)
+count1++;
+for(i=count;i<=m;i++)
+printf("%d",x[i]);
+printf("\n");
+if(f==1)
+y[count1]=-y[count1];
+for(i=count1;i<=m;i++)
+printf("%d",y[i]);
+}
+printf("\n");
+scanf("%d",&z);
+if(z==0)
+return 0;
+}
+return 0;
+}

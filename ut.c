@@ -1,0 +1,73 @@
+#include<stdio.h>
+int main()
+{
+char n1[101],n2[101];
+int i,x[101],y[101],l=0,m=0,carry=0,count=0;
+scanf("%s",n1);
+scanf("%s",n2);
+for(i=0;i<100&&n1[i]!='\0';i++)
+{
+    l++;
+}
+for(i=0;i<100&&n2[i]!='\0';i++)
+{
+    m++;
+}
+if(l>=m)
+{
+for(i=0;i<l;i++)
+{
+    x[i]=n1[i]-'0';
+}
+for(i=0;i<m;i++)
+{
+    y[i+l-m]=n2[i]-'0';
+}
+for(i=0;i<l-m;i++)
+{
+    y[i]=0;
+}
+for(i=l-1;i>=0;i--)
+{
+    x[i+1]=x[i]+y[i]+carry;
+    carry=x[i+1]/10;
+    x[i+1]=x[i+1]%10;
+}
+x[0]=carry;
+if(carry==0)
+for(i=0;i<l;i++)
+printf("%d",x[i+1]);
+else
+for(i=0;i<=l;i++)
+printf("%d",x[i]);
+}
+else
+{
+for(i=0;i<l;i++)
+{
+x[i+m-l]=n1[i]-'0';
+}
+for(i=0;i<m;i++)
+{
+    y[i]=n2[i]-'0';
+}
+for(i=0;i<m-l;i++)
+{
+    x[i]=0;
+}
+for(i=m-1;i>=0;i--)
+{
+    x[i+1]=x[i]+y[i]+carry;
+    carry=x[i+1]/10;
+    x[i+1]=x[i+1]%10;
+}
+x[0]=carry;
+for(i=0;i<m;i++)
+if(x[i]==0)
+count++;
+printf("abcd %d",count);
+for(i=count;i<m;i++)
+printf("%d",x[i]);
+}
+return 0;
+}
